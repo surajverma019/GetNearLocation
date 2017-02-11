@@ -1,0 +1,20 @@
+ALTER FUNCTION GetDistanceInMile(
+@Latitude1 float,
+@Longitude1 float,
+@Latitude2 float,
+@Longitude2 float
+)
+RETURNS float 
+AS  
+BEGIN 
+-- CONSTANTS
+DECLARE @EarthRadiusInMiles float;
+SET @EarthRadiusInMiles = 3959;
+RETURN
+(@EarthRadiusInMiles*acos
+(cos(radians(@Latitude2)) * 
+cos( radians(@Latitude1)) * 
+cos(radians(@Longitude1) - 
+radians(@Longitude2))+sin(radians(@Latitude2))* 
+sin( radians(@Latitude1))));
+END
